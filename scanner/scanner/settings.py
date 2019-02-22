@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '022-w12b5_v0^*)6cq52%%si2j7)1k1y6)-fr6ypedtxemvw@1'
 
 # GOOGLE KEY
-GOOGLE_API_KEY = 'AIzaSyAn5aF2aAGpTOZh3ZZT86vcfa-PSUIoxo'
+GOOGLE_API_KEY = 'AIzaSyAn5aF2aAGpTOZh3ZZT86vcfa-PSUIoxoI'
 #GOOGLE_KEY = 'AIzaSyAn5aF2aAGpTOZh3ZZT86vcfa-PSUIoxoI'
 
 # SECURITY WARNING: don't run with debug turned on in production!

@@ -1,5 +1,8 @@
+import json
 import logging
 
+import requests
+from django.conf import settings
 from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
@@ -13,9 +16,11 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from settings import GOOGLE_API_KEY
 
-logger = logging.logger('__name')
+logger = logging.getLogger('__name__')
+
+ADRESS = 'https://www.googleapis.com/geolocation/v1/geolocate?key={}'
+URL = ADRESS.format(settings.GOOGLE_API_KEY)
 
 
 class DeviceViewSet(ModelViewSet):
@@ -28,21 +33,17 @@ class DeviceViewSet(ModelViewSet):
 class LocationViewSet(ModelViewSet):
     """
     """
+    queryset = Location.objects.all()
+    serializer_class = LocationSerialzer
     render_class = (JSONRenderer,)
     context_object_name = 'locations'
     serializer_class = LocationSerialzer
-    permission_classes = (AllowAny)
-
-    @action(methods='post')
-    def get_location(self, request):
-        pass
 
     def create(self, request):
-        device_info = request.POST
-        url = 'https://www.googleapis.com/geolocation/v1/geolocate?key={}'.format(
-            GOOGLE_API_KEY)
-
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        # do your thing here
-        return super().create(request)
+        data = request.POST
+        response = requests.post(URL, json=data)
+        response.raise_for_status()
+        if response.status_code is not 200:
+            logger.error('Failed with {} error'.format(response.status_code))
+            return Response("", status=status.HTTP_400_BAD_REQUEST)
+        return Response(response.json())
