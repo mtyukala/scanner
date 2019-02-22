@@ -4,3 +4,11 @@ We would like you to create a service that accepts Wi-Fi access point (AP) scan 
 
 #Requirements
 We would like the solution to be a Python REST API. It needs to accept a single batch of AP scan data of the format:
+
+# How to install
+
+
+#To test the api
+curl -d "@<filenme>.json" -X POST http://<ip address or url>:<port>/api/v1/scan/
+
+
