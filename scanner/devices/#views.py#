@@ -41,7 +41,7 @@ class LocationViewSet(ModelViewSet):
         device_info = request.POST
         url = 'https://www.googleapis.com/geolocation/v1/geolocate?key={}'.format(
             GOOGLE_API_KEY)
-
+        
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         # do your thing here

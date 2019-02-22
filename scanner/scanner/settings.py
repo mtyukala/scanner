@@ -22,6 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '022-w12b5_v0^*)6cq52%%si2j7)1k1y6)-fr6ypedtxemvw@1'
 
+# GOOGLE KEY
+GOOGLE_API_KEY = 'AIzaSyAn5aF2aAGpTOZh3ZZT86vcfa-PSUIoxo'
+#GOOGLE_KEY = 'AIzaSyAn5aF2aAGpTOZh3ZZT86vcfa-PSUIoxoI'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -37,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'devices',
+    'requests',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
