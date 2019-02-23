@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+Scanner
+{% endblock %}
+
+{% block content  %}
+  
+<form method="POST"  class="form" action="{% url 'devices:scan' %}">
+  <div class="form-row align-items-center">
+        {% csrf_token %} <div class="input-group">
+      <input class="form-control" aria-describedby="searchHelp" id="json_file_field" name="q" type="file" />
+      <span class="input-group-btn">
+	<button type="submit" name="load" class="button btn btn-primary">Scan</button>	
+      </span>
+    </div>
+  </div>
+</form>
+<section>
+  {% if locations %}
+  {{locations}}
+  {% else %}
+  
+  
+  {% endif %}
+</section>
+
+{% endblock %}

@@ -9,6 +9,7 @@ We would like the solution to be a Python REST API. It needs to accept a single 
 
 
 #To test the api
-curl -d "@<filenme>.json" -X POST http://<ip address or url>:<port>/api/v1/scan/
+
+curl -d "@<filenme>.json" -X POST http://(ip address or url):(port)/api/v1/scan/
 
 

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from os.path import abspath, basename, dirname, join, normpath
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,12 +25,15 @@ SECRET_KEY = '022-w12b5_v0^*)6cq52%%si2j7)1k1y6)-fr6ypedtxemvw@1'
 
 # GOOGLE KEY
 GOOGLE_API_KEY = 'AIzaSyAn5aF2aAGpTOZh3ZZT86vcfa-PSUIoxoI'
-#GOOGLE_KEY = 'AIzaSyAn5aF2aAGpTOZh3ZZT86vcfa-PSUIoxoI'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+PROJECT_TEMPLATES = [
+    join(BASE_DIR, 'devices/templates'),
+]
 
 
 # Application definition
@@ -81,6 +85,20 @@ CACHES = {
     }
 }
 
+# rest framework
+REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAdminUser', ],
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.BasicAuthentication', 'rest_framework.authentication.TokenAuthentication',
+                                       'rest_framework.authentication.SessionAuthentication'],
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.TemplateHTMLRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
+}
 WSGI_APPLICATION = 'scanner.wsgi.application'
 
 

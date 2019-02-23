@@ -13,7 +13,7 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 # Create your views here.
-from rest_framework.renderers import JSONRenderer
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -35,15 +35,22 @@ class LocationViewSet(ModelViewSet):
     """
     queryset = Location.objects.all()
     serializer_class = LocationSerialzer
-    render_class = (JSONRenderer,)
+    render_class = (JSONRenderer, TemplateHTMLRenderer,)
     context_object_name = 'locations'
     serializer_class = LocationSerialzer
+    permission_classes = (AllowAny,)
+    template_name = 'home.html'
 
     def create(self, request):
         data = request.POST
         response = requests.post(URL, json=data)
         response.raise_for_status()
+
         if response.status_code is not 200:
             logger.error('Failed with {} error'.format(response.status_code))
-            return Response("", status=status.HTTP_400_BAD_REQUEST)
+            return Response("Error Occured", status=response.status_code)
+
+        if request.accepted_renderer.format == 'html':
+            return Response(response.json(), template_name=self.template_name)
+
         return Response(response.json())
