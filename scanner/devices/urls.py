@@ -1,16 +1,13 @@
+from django.conf.urls import handler400, handler403, handler404, handler500
 from django.urls import include, path
 
-from devices.models import Device, Location
-from devices.views import DeviceViewSet, LocationViewSet
-from rest_framework.routers import DefaultRouter
+from devices.views import DeviceViewSet, LocationDetailView, LocationView
 
-router = DefaultRouter()
-router.register(r'scan', LocationViewSet, base_name='scan')
-router.register(r'location', DeviceViewSet, base_name='loction')
+handler400 = 'devices.views.bad_request'
+handler403 = 'devices.views.permission_denied'
+handler404 = 'devices.views.handler404'
+handler500 = 'devices.views.handler500'
 
-#app_name = 'device'
 urlpatterns = [
-    #    path(r'api/v1/devices/', DeviceViewSet, name='devices'),
-    #   path(r'scan/', LocationViewSet, name='locations'),
-    path('', include((router.urls, 'devices'), namespace='devices')),
+    path(r'scan/', LocationDetailView.as_view(), name='location'),
 ]
