@@ -1,7 +1,7 @@
 from django.conf.urls import handler400, handler403, handler404, handler500
 from django.urls import include, path
 
-from devices.views import DeviceViewSet, LocationDetailView, LocationView
+from devices.views import LocationDetailView
 
 handler400 = 'devices.views.bad_request'
 handler403 = 'devices.views.permission_denied'

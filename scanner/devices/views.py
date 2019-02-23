@@ -33,10 +33,10 @@ class LocationDetailView(DetailView):
 
             if request.META['HTTP_ACCEPT'] == 'text/html':
                 context = {"location": response.json()}
-                return render(request, template_name=self.template_name, context)
+                return render(request, template_name=self.template_name, context=context)
 
             return JsonResponse(response.json())
-        except HTTPError as e:
+        except requests.exceptions.HTTPError as e:
             logger.error("Http Error:", e)
         except requests.exceptions.ConnectionError as errc:
             logger.error("Error Connecting:", errc)

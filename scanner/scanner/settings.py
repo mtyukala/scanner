@@ -28,8 +28,15 @@ GOOGLE_API_KEY = 'AIzaSyAn5aF2aAGpTOZh3ZZT86vcfa-PSUIoxoI'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if DEBUG is False:
+    ALLOWED_HOSTS = [
+        '127.0.0.1:8000',
+        '*',
+    ]
 
-ALLOWED_HOSTS = []
+if DEBUG is True:
+    ALLOWED_HOSTS = []
+
 
 PROJECT_TEMPLATES = [
     join(BASE_DIR, 'devices/templates'),

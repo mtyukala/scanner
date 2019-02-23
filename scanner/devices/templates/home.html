@@ -8,13 +8,15 @@ Scan
 <form method="POST"  class="form" action="{% url 'location' %}">
   <div class="form-row align-items-center">
         {% csrf_token %} <div class="input-group">
-      <input class="form-control" aria-describedby="searchHelp" id="json_file_field" name="scandata" type="file" />
+      <input class="form-control" id="json_file_field" name="scandata" type="file" />
       <span class="input-group-btn">
-	<button type="submit" name="load" class="button btn btn-primary">Scan</button>	
+	<button type="submit" name="scan" class="button btn btn-primary">Scan</button>	
       </span>
     </div>
   </div>
 </form>
+
+
 <section>
   {% if locations %}
   {{locations}}
